@@ -3,3 +3,6 @@ Ya, jelas ada perbedaan. saat sebelum saya attached ke dalam service, berarti de
 ![blm ada service atau blm diexpose](static/1.png)
 ![sudah ada service dan baru diakses dua kali](static/2.png)
 ![sudah ada service dan diakses berkali kali](static/3.png)
+
+2. Notice that there are two versions of `kubectl get` invocation during this tutorial section. The first does not have any option, while the latter has `-n` option with value set to `kube-system`. What is the purpose of the `-n` option and why did the output not list the pods/services that you explicitly created?
+Sebetulnya ini ya bukan seuah hal yang kompleks ya. -n itu adalah kata kunci dari namespace, jadi kalau tidak ada -n ya namespacenya namespace untuk default namespace alias user, sedangkan kalau ada -n dan valuenya kube-system itu namespacenya adalah namespace dari sistem kubernetes itu sendiri. dalam arti dia akan menampilkan semua pods dari namespace kube-system
