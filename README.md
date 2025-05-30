@@ -6,3 +6,34 @@ Ya, jelas ada perbedaan. saat sebelum saya attached ke dalam service, berarti de
 
 2. Notice that there are two versions of `kubectl get` invocation during this tutorial section. The first does not have any option, while the latter has `-n` option with value set to `kube-system`. What is the purpose of the `-n` option and why did the output not list the pods/services that you explicitly created?
 Sebetulnya ini ya bukan seuah hal yang kompleks ya. -n itu adalah kata kunci dari namespace, jadi kalau tidak ada -n ya namespacenya namespace untuk default namespace alias user, sedangkan kalau ada -n dan valuenya kube-system itu namespacenya adalah namespace dari sistem kubernetes itu sendiri. dalam arti dia akan menampilkan semua pods dari namespace kube-system
+![sys](static/4)
+
+
+========================================== YANG TERAKHIRRRR =======================================================
+1. What is the difference between Rolling Update and Recreate deployment strategy?
+Rolling Update dan Recreate merupakan dua pendekatan berbeda dalam melakukan deployment di Kubernetes. Rolling Update memperbarui aplikasi secara bertahap dengan menggantikan pod lama satu per satu dengan pod baru, sehingga layanan tetap berjalan dan tidak mengalami gangguan selama proses berlangsung. Sebaliknya, strategi Recreate menghentikan seluruh pod lama terlebih dahulu, lalu meluncurkan pod baru, yang mengakibatkan downtime namun memastikan hanya satu versi aplikasi yang aktif dalam satu waktu.
+
+2. Try deploying the Spring Petclinic REST using Recreate deployment strategy and document your attempt.
+reset dan start
+![mulai awal](static/5.png)
+buat deployment
+![start](static/6.png)
+scaling 4 replika
+![replica](static/7.png)
+rubah strategi rolling update pada spec.strategy
+`
+strategy:
+    type: Recreate
+`
+coba deploy
+![deploy Recreate](static/8.png)
+sanity check
+![sanity check](static/9.png)
+
+3. Prepare different manifest files for executing Recreate deployment strategy.
+![export manifest](static/10.png)
+
+path = simpan sesukanya
+
+4. What do you think are the benefits of using Kubernetes manifest files? Recall your experience in deploying the app manually and compare it to your experience when deploying the same app by applying the manifest files (i.e., invoking kubectl apply -f command) to the cluster.
+dengan manifest file, kita bisa menyimpan konfigurasi sesuai yang kita inginkan, dengan itu kita dapat menghemat banyak waktu dan tenanga daripada melkukan edit manual, plus kita bisa melakukan deploying secara langsung.
